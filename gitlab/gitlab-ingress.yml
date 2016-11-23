@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gitlab
+spec:
+  rules:
+  - host: gitlab.dev
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: gitlab
+          servicePort: http
+# @todo need the https and ssh ports

@@ -1,0 +1,21 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: gitlab
+  labels:
+    app: gitlab
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gitlab
+    spec:
+      containers:
+      - name: gitlab
+        image: gitlab/gitlab-ce
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        - containerPort: 22
