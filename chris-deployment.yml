@@ -1,0 +1,48 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: chrismarslender
+  labels:
+    app: hello-node
+    name: chrismarslender
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-node
+        task: chrismarslender
+        version: v1
+    spec:
+      containers:
+      - name: chrismarslender
+        image: cmmarslender/hello-node:v1
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chrismarslender
+spec:
+  ports:
+  - name: http
+    targetPort: 8080
+    port: 80
+  selector: # The mapping uses a selector key:value pair in the service, and the labels property of pods. Any pods whose labels match the service selector are made accessible through the service’s port.
+    app: hello-node
+    task: chrismarslender
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: chrismarslender
+spec:
+  rules:
+  - host: chrismarslender.dev
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: chrismarslender
+          servicePort: http
