@@ -4,21 +4,21 @@ metadata:
   name: cheese
 spec:
   rules:
-  - host: stilton.local
+  - host: stilton.dev
     http:
       paths:
       - path: /
         backend:
           serviceName: stilton
           servicePort: http
-  - host: cheddar.local
+  - host: cheddar.dev
     http:
       paths:
       - path: /
         backend:
           serviceName: cheddar
           servicePort: http
-  - host: wensleydale.local
+  - host: wensleydale.dev
     http:
       paths:
       - path: /
